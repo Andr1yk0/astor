@@ -1,0 +1,12 @@
+services:
+  node:
+    container_name: astor_node
+    user: node
+    build: ./.docker/node
+    volumes:
+      - ./app:/home/node/app
+    working_dir: /home/node/app
+    ports:
+      - "8099:8080"
+      - "4000:4000"
+    tty: true
