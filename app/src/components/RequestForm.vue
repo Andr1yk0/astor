@@ -24,7 +24,7 @@
         </div>
         <div class="col-12 bg-secondary-subtle py-2 mb-3">
             <h4 class="text-center">Замовник</h4>
-            <CustomerFormFields v-model="formData.customer"/>
+            <CustomerFormFields v-model="formData.customer" :enable-autocomplete="true"/>
         </div>
         <EditCustomerModal v-if="editCustomer" @closed="editCustomer = false" />
         <div class="col-12">

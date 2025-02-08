@@ -8,7 +8,6 @@ import CustomerService from "@/services/customerService";
 Vue.config.productionTip = false
 Vue.prototype.$requestsService = new RequestService();
 Vue.prototype.$customerService = new CustomerService();
-export const eventBus = new Vue();
 
 new Vue({
   render: h => h(App),

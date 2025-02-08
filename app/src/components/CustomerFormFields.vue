@@ -41,6 +41,10 @@ export default {
     name: "CustomerFormFields",
     props: {
         value: Object,
+        enableAutocomplete: {
+            type: Boolean,
+            default: false
+        }
     },
     data: function () {
         return {
@@ -65,7 +69,7 @@ export default {
             })
         },
         getAutocompleteCustomers: function(){
-            if(!this.formData.lastName){
+            if(!this.enableAutocomplete || !this.formData.lastName){
                 this.autocompleteCustomers = [];
                 return;
             }
