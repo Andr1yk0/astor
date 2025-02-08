@@ -19,6 +19,7 @@
             <EditCustomerModal
                 v-if="editCustomer"
                 @closed="editCustomer = false"
+                @formSaved="customerFormSavedHandler"
             />
             <ViewRequestModal
                 v-if="viewRequest"
@@ -58,6 +59,7 @@ export default {
         requestFormSavedHandler: function (){
             this.listUpdateTimestamp = Date.now();
             this.editRequest = false;
+            this.selectedRequest = null;
         },
         viewRequestHandler: function ($event){
             this.selectedRequest = $event;
@@ -71,10 +73,10 @@ export default {
             this.viewRequest = false;
             this.selectedRequest = request;
             this.editRequest = true;
+        },
+        customerFormSavedHandler: function (){
+            this.editCustomer = false;
         }
     }
 }
 </script>
-
-<style>
-</style>

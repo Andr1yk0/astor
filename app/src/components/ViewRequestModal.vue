@@ -7,7 +7,7 @@
                     <dd class="col-sm-8">{{ request.number }}</dd>
                     <hr>
                     <dt class="col-sm-4">Дата</dt>
-                    <dd class="col-sm-8">{{ formatDate(request.date) }}</dd>
+                    <dd class="col-sm-8"><FormattedDate :date="request.date"/></dd>
                     <hr>
                     <dt class="col-sm-4">Причина звернення</dt>
                     <dd class="col-sm-8">{{ requestReasons[request.reason] }}</dd>
@@ -53,11 +53,8 @@
 <script>
 import Modal from "@/components/Modal.vue";
 import { requestReasons } from "@/dictionaries/requestReasons";
-import dayjs from "dayjs";
 import DocumentsList from "@/components/DocumentsList.vue";
-
-const localizedFormat = require('dayjs/plugin/localizedFormat');
-dayjs.extend(localizedFormat);
+import FormattedDate from "@/components/FormattedDate.vue";
 
 export default {
     name: "ViewRequestModal",
@@ -67,7 +64,7 @@ export default {
             required: true
         }
     },
-    components: {DocumentsList, Modal},
+    components: {FormattedDate, DocumentsList, Modal},
     data: function (){
         return {
             requestReasons: requestReasons
@@ -76,9 +73,6 @@ export default {
     methods: {
         close: function (){
             this.$emit("closed");
-        },
-        formatDate: function (date){
-            return dayjs(date).format('L')
         },
         editRequestHandler: function (){
             this.$emit("editRequest", this.request);

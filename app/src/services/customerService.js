@@ -2,18 +2,11 @@ export default class CustomerService {
     #customers = [
         {
             id: 1,
-            firstName: 'John',
-            lastName: 'Doe',
+            firstName: 'Андрій',
+            lastName: 'Садовий',
             address: 'м. Львів, вул. Городоцька 11',
             phone: '0321172233'
         },
-        {
-            id: 2,
-            firstName: 'John',
-            lastName: 'Doe',
-            address: 'м. Львів, вул. Городоцька 11',
-            phone: '0321172233'
-        }
     ];
 
     search(params){
@@ -32,6 +25,14 @@ export default class CustomerService {
         }
         return new Promise((resolve) => {
             resolve(customers);
+        })
+    }
+
+    addCustomer(customerData){
+        return new Promise((resolve) => {
+            const customer = {id: new Date().getTime(), ...customerData}
+            this.#customers.push(customer)
+            resolve({...customer})
         })
     }
 }

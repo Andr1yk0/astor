@@ -19,12 +19,12 @@
             <textarea v-model="formData.comment" rows="4" class="form-control"></textarea>
         </div>
         <div class="col-md-12 mb-3">
-            <label class="form-label">Потужність приєднання</label>
+            <label class="form-label">Потужність приєднання, кВт</label>
             <input v-model="formData.power" required type="number" step="any" class="form-control">
         </div>
         <div class="col-12 bg-secondary-subtle py-2 mb-3">
             <h4 class="text-center">Замовник</h4>
-            <CustomerForm v-model="formData.customer"/>
+            <CustomerFormFields v-model="formData.customer"/>
         </div>
         <EditCustomerModal v-if="editCustomer" @closed="editCustomer = false" />
         <div class="col-12">
@@ -37,13 +37,13 @@
 </template>
 <script>
 import EditCustomerModal from "@/components/EditCustomerModal.vue";
-import CustomerForm from "@/components/CustomerForm.vue";
 import {requestReasons} from "@/dictionaries/requestReasons";
 import DocumentsList from "@/components/DocumentsList.vue";
+import CustomerFormFields from "@/components/CustomerFormFields.vue";
 
 export default {
     name: "RequestForm",
-    components: {DocumentsList, CustomerForm, EditCustomerModal},
+    components: {CustomerFormFields, DocumentsList, EditCustomerModal},
     props: {
         request: {
             type: Object,

@@ -24,7 +24,6 @@ export default {
     data: function (){
         return {
             modal: null,
-            submitForm: false,
             formSubmitting: false,
         }
     },

@@ -1,15 +1,15 @@
-export default class RequestsService {
+export default class RequestService {
     #requests = [
         {
             id: 1,
-            number: 1,
+            number: '1',
             date: '2025-01-01',
             reason: '1',
             comment: 'test comment',
             power: 2.3,
             customer: {
-                firstName: 'John',
-                lastName: 'Doe',
+                firstName: 'Юрій',
+                lastName: 'Петренко',
                 address: 'м. Львів, вул. Городоцька 11',
                 phone: '0321172223'
             }

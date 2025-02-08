@@ -25,7 +25,7 @@
             <tbody v-if="requests.length">
             <tr v-for="request in requests" :key="request.number">
                 <td>{{ request.number }}</td>
-                <td>{{ formatDate(request.date) }}</td>
+                <td><FormattedDate :date="request.date"/></td>
                 <td>{{ requestReasons[request.reason] }}</td>
                 <td>{{ request.power }} кВт</td>
                 <td>{{ request.customer.lastName}} {{request.customer.firstName}}</td>
@@ -42,7 +42,7 @@
             </tbody>
             <tbody v-else>
                 <tr>
-                    <td colspan="6" class="text-center">Дани не знайдено</td>
+                    <td colspan="6" class="text-center">Даних не знайдено</td>
                 </tr>
             </tbody>
         </table>
@@ -52,17 +52,15 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEdit, faEye } from "@fortawesome/free-regular-svg-icons";
-import {requestReasons} from "@/dictionaries/requestReasons";
-import dayjs from "dayjs";
+import { requestReasons } from "@/dictionaries/requestReasons";
+import FormattedDate from "@/components/FormattedDate.vue";
 
-const localizedFormat = require('dayjs/plugin/localizedFormat');
-dayjs.extend(localizedFormat);
 
 library.add(faEdit, faEye);
 
 export default {
     name: "RequestsList",
-    components: {FontAwesomeIcon},
+    components: {FormattedDate, FontAwesomeIcon},
     props: {
         updateTimestamp: Number
     },
@@ -89,9 +87,6 @@ export default {
             for (let field in this.filter){
                 this.filter[field] = null;
             }
-        },
-        formatDate: function (date){
-            return dayjs(date).format('L')
         },
         viewRequestHandler: function (request){
             this.$emit('viewRequest', request)

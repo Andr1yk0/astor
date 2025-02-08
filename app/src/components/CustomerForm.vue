@@ -1,44 +1,15 @@
 <template>
-    <form class="row">
-        <div class="col-md-6 mb-3">
-            <label class="form-label">Прізвище</label>
-            <input v-model="formData.lastName" @input="getAutocompleteCustomers" type="text" class="form-control">
-        </div>
-        <div class="col-md-6 mb-3">
-            <label class="form-label">Ім'я</label>
-            <input v-model="formData.firstName" type="text" class="form-control">
-        </div>
-        <div class="col-12">
-            <div v-if="autocompleteCustomers.length" class="col-12 position-absolute autocomplete-customers-wrap">
-                <div class="list-group">
-                    <a href="#"
-                       v-for="customer in autocompleteCustomers"
-                       :key="customer.id"
-                       @click="autofillCustomer(customer)"
-                       class="list-group-item list-group-item-action"
-                    >
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">{{ customer.firstName }} {{ customer.lastName }}</h5>
-                        </div>
-                        <p class="mb-1">{{ customer.address }}</p>
-                        <small>{{ customer.phone }}</small>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 mb-3">
-            <label class="form-label">Адреса</label>
-            <input v-model="formData.address" type="text" class="form-control">
-        </div>
-        <div class="col-12 mb-3">
-            <label class="form-label">Телефон</label>
-            <input v-model="formData.phone" type="text" class="form-control">
-        </div>
+    <form ref="form" @submit.prevent="store">
+        <CustomerFormFields v-model="formData" />
+        <input ref="submitInput" class="d-none" type="submit">
     </form>
 </template>
 <script>
+import CustomerFormFields from "@/components/CustomerFormFields.vue";
+
 export default {
     name: "CustomerForm",
+    components: {CustomerFormFields},
     props: {
         value: Object,
     },
@@ -73,32 +44,19 @@ export default {
         }
     },
     methods: {
-        autofillCustomer(customer) {
-            for(let field in customer){
-                if(field in this.formData){
-                    this.formData[field] = customer[field];
-                }
-            }
-            this.$nextTick(() => {
-                this.autocompleteCustomers = []
-            })
+        submit: function () {
+            this.$refs.submitInput.click();
         },
-        getAutocompleteCustomers(){
-            if(!this.formData.lastName){
-                this.autocompleteCustomers = [];
-                return;
-            }
-            this.$customerService.search({lastName: this.formData.lastName})
-                .then((data) => {
-                    this.autocompleteCustomers = data;
+        store: function () {
+            this.$emit('submitting', true);
+            this.$customerService.addCustomer(this.formData)
+                .then(() => {
+                    this.$emit('saved');
+                })
+                .finally(() => {
+                    this.$emit('submitting', false);
                 })
         }
     }
 }
 </script>
-<style scoped>
-    .autocomplete-customers-wrap {
-        max-width: 94%;
-        position: absolute;
-    }
-</style>
