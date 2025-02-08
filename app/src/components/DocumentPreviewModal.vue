@@ -1,16 +1,18 @@
 <template>
     <Modal :title="file.name" :dialog-class="'modal-lg'" @closed="$emit('closed')">
         <div slot="body">
-            <iframe class="w-100" :src="fileSrc" />
+            <iframe v-if="file.type === 'application/pdf'" class="w-100" :src="fileSrc" />
+            <MSDocPreview v-else :file="file" />
         </div>
     </Modal>
 </template>
 <script>
 import Modal from "@/components/Modal.vue";
+import MSDocPreview from "@/components/MSDocPreview.vue";
 
 export default {
     name: "DocumentPreviewModal",
-    components: {Modal},
+    components: {MSDocPreview, Modal},
     props: {
         file: {
             type: File,

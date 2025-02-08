@@ -11,6 +11,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/vue-fontawesome": "^2.0.10",
+    "@nutrient-sdk/viewer": "^1.0.0",
     "bootstrap": "^5.3.3",
     "core-js": "^3.8.3",
     "dayjs": "^1.11.13",

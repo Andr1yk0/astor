@@ -6,7 +6,6 @@
                 <div>
                     <button
                         type="button"
-                        v-if="file.type === 'application/pdf'"
                         class="btn btn-outline-primary btn-sm"
                         @click="setPreviewFile(file)"
                     >
