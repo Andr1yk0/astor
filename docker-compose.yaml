@@ -4,8 +4,8 @@ services:
     user: node
     build: ./.docker/node
     volumes:
-      - ./app:/home/node/app
-    working_dir: /home/node/app
+      - ./:/home/node/astor
+    working_dir: /home/node/astor
     ports:
       - "8099:8080"
       - "4000:4000"
