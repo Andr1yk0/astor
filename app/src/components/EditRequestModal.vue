@@ -1,7 +1,7 @@
 <template>
     <Modal @closed="close" :title="`${request ? 'Редагування' : 'Створення'} заяви`">
         <div slot="body">
-            <RequestForm ref="requestForm" @saved="savedHandler" @submitting="submittingHandler" />
+            <RequestForm :request="request" ref="requestForm" @saved="savedHandler" @submitting="submittingHandler" />
         </div>
         <div slot="footer">
             <button type="button" @click="save()" class="btn btn-primary">Зберегти</button>
@@ -45,6 +45,3 @@ export default {
     }
 }
 </script>
-<style scoped>
-
-</style>
